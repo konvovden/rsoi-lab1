@@ -2,6 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Server", "PersonService.Server\PersonService.Server.csproj", "{91E9DE57-BFDD-4C93-933E-996EB45D0EB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Dto", "PersonService.Dto\PersonService.Dto.csproj", "{2272913F-CD57-4454-8C4F-52C1FDF6B6E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Adapters", "PersonService.Adapters\PersonService.Adapters.csproj", "{94380E97-F884-43D8-B668-4E6D630230D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D613D2FB-79C0-4255-BB9A-817AC5334B32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Database.Context", "Database\PersonService.Database.Context\PersonService.Database.Context.csproj", "{66E10D77-DE74-43A7-9D62-168B6885F6B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Database.Models", "Database\PersonService.Database.Models\PersonService.Database.Models.csproj", "{35551F49-33E0-4DCC-931E-74E7A320FFD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Database.Repositories", "Database\PersonService.Database.Repositories\PersonService.Database.Repositories.csproj", "{AC6EAD6A-C56E-4543-902B-78C05387B50F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +24,30 @@ Global
 		{91E9DE57-BFDD-4C93-933E-996EB45D0EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E9DE57-BFDD-4C93-933E-996EB45D0EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E9DE57-BFDD-4C93-933E-996EB45D0EB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2272913F-CD57-4454-8C4F-52C1FDF6B6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2272913F-CD57-4454-8C4F-52C1FDF6B6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2272913F-CD57-4454-8C4F-52C1FDF6B6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2272913F-CD57-4454-8C4F-52C1FDF6B6E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94380E97-F884-43D8-B668-4E6D630230D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94380E97-F884-43D8-B668-4E6D630230D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94380E97-F884-43D8-B668-4E6D630230D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94380E97-F884-43D8-B668-4E6D630230D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E10D77-DE74-43A7-9D62-168B6885F6B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E10D77-DE74-43A7-9D62-168B6885F6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E10D77-DE74-43A7-9D62-168B6885F6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E10D77-DE74-43A7-9D62-168B6885F6B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35551F49-33E0-4DCC-931E-74E7A320FFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35551F49-33E0-4DCC-931E-74E7A320FFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35551F49-33E0-4DCC-931E-74E7A320FFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35551F49-33E0-4DCC-931E-74E7A320FFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6EAD6A-C56E-4543-902B-78C05387B50F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6EAD6A-C56E-4543-902B-78C05387B50F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6EAD6A-C56E-4543-902B-78C05387B50F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6EAD6A-C56E-4543-902B-78C05387B50F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66E10D77-DE74-43A7-9D62-168B6885F6B1} = {D613D2FB-79C0-4255-BB9A-817AC5334B32}
+		{35551F49-33E0-4DCC-931E-74E7A320FFD7} = {D613D2FB-79C0-4255-BB9A-817AC5334B32}
+		{AC6EAD6A-C56E-4543-902B-78C05387B50F} = {D613D2FB-79C0-4255-BB9A-817AC5334B32}
 	EndGlobalSection
 EndGlobal
