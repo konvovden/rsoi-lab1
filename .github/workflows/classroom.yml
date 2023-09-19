@@ -63,7 +63,7 @@ jobs:
             docker-compose -f rsoi/docker-compose.yml up -d
 
       - name: Wait startup
-        uses: iFaxity/wait-on-action
+        uses: iFaxity/wait-on-action@v1.1.0
         with:
           resource: http://${{ secrets.DEPLOY_HOST }}:8080/api/v2/persons
 
