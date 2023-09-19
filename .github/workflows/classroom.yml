@@ -65,7 +65,7 @@ jobs:
       - name: Wait startup
         uses: iFaxity/wait-on-action@v1.1.0
         with:
-          resource: http://${{ secrets.DEPLOY_HOST }}:8080/api/v1/persons
+          resource: http-get://${{ secrets.DEPLOY_HOST }}:8080/api/v1/persons
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
