@@ -1,18 +1,26 @@
 version: "3"
 services:
-  postgres:
-    image: library/postgres:13
+  database:
+    image: postgres:latest
     container_name: postgres
     restart: on-failure
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_PASSWORD: "PaSSw0rdAdmin"
       POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+
+  person-service:
+    image: konvovden/person-service:latest
+    container_name: person_service
+    restart: on-failure
+    depends_on:
+      - database
+    ports:
+      - "8080:80"
 
 volumes:
   db-data:
