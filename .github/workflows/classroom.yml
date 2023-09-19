@@ -39,14 +39,6 @@ jobs:
           tags: konvovden/person-service:latest
           context: .
 
-      - name: Run API Tests
-        uses: matt-ball/newman-action@master
-        with:
-          collection: postman/[inst] Lab1.postman_collection.json
-          environment: postman/[inst][heroku] Lab1.postman_environment.json
-          delayRequest: 100
-          reporters: '[ "cli" ]'
-
       - name: Send docker-compose
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -69,6 +61,14 @@ jobs:
             docker-compose -f rsoi/person-service-docker-compose.yml down
             docker-compose -f rsoi/person-service-docker-compose.yml pull
             docker-compose -f rsoi/person-service-docker-compose.yml up -d
+
+      - name: Run API Tests
+        uses: matt-ball/newman-action@master
+        with:
+          collection: postman/[inst] Lab1.postman_collection.json
+          environment: postman/[inst][heroku] Lab1.postman_environment.json
+          delayRequest: 100
+          reporters: '[ "cli" ]'
 
       - name: Autograding
         uses: education/autograding@v1
