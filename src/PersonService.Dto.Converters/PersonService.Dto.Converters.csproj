@@ -4,14 +4,10 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Implementations\" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\PersonService.Core\PersonService.Core.csproj" />
       <ProjectReference Include="..\PersonService.Dto\PersonService.Dto.csproj" />
     </ItemGroup>
 

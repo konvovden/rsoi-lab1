@@ -1,6 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using PersonService.Dto;
+using PersonService.Core.Exceptions;
+using PersonService.Core.Repositories;
+using PersonService.Dto.Converters;
+using PersonService.Dto.Models;
+using PersonService.Dto.Requests;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace PersonService.Server.Controllers;
@@ -8,7 +12,14 @@ namespace PersonService.Server.Controllers;
 [ApiController]
 [Route("/api/v1/persons")]
 public class PersonsController : ControllerBase
-{ 
+{
+    private readonly IPersonRepository _personRepository;
+
+    public PersonsController(IPersonRepository personRepository)
+    {
+        _personRepository = personRepository;
+    }
+
     /// <summary>
     /// Create new Person
     /// </summary>
@@ -17,9 +28,14 @@ public class PersonsController : ControllerBase
     /// <response code="400">Invalid data</response>
     [HttpPost]
     [SwaggerOperation("CreatePerson")]
-    public virtual IActionResult CreatePerson([FromBody]Person personRequest)
+    public async Task<IActionResult> CreatePerson([FromBody]Person personRequest)
     {
-        throw new NotImplementedException();
+        var person = await _personRepository.CreatePersonAsync(personRequest.Name,
+            personRequest.Age,
+            personRequest.Address,
+            personRequest.Work);
+        
+        return Created($"/api/v1/persons/{person.Id}", PersonConverter.Convert(person));
     }
 
     /// <summary>
@@ -33,9 +49,24 @@ public class PersonsController : ControllerBase
     [HttpPatch("{id:int}")]
     [SwaggerOperation("EditPerson")]
     [SwaggerResponse(statusCode: 200, type: typeof(Person), description: "Person for ID was updated")]
-    public virtual IActionResult EditPerson([FromRoute][Required]int id, [FromBody]Person personRequest)
+    public async Task<IActionResult> EditPerson([FromRoute][Required]int id, [FromBody]PatchPersonRequest personRequest)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var person = await _personRepository.GetPersonAsync(id);
+            
+            var updatedPerson = await _personRepository.UpdatePersonAsync(id, 
+                personRequest.Name,
+                personRequest.Age.GetValueOrDefault(person.Age),
+                personRequest.Address.GetValueOrDefault(person.Address),
+                personRequest.Work.GetValueOrDefault(person.Work));
+
+            return Ok(PersonConverter.Convert(updatedPerson));
+        }
+        catch (PersonNotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     /// <summary>
@@ -45,9 +76,18 @@ public class PersonsController : ControllerBase
     /// <response code="204">Person for ID was removed</response>
     [HttpDelete("{id:int}")]
     [SwaggerOperation("DeletePerson")]
-    public virtual IActionResult DeletePerson([FromRoute][Required]int id)
-    { 
-        throw new NotImplementedException();
+    public async Task<IActionResult> DeletePerson([FromRoute][Required]int id)
+    {
+        try
+        {
+            await _personRepository.DeletePersonAsync(id);
+
+            return NoContent();
+        }
+        catch (PersonNotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     /// <summary>
@@ -59,9 +99,18 @@ public class PersonsController : ControllerBase
     [HttpGet("{id:int}")]
     [SwaggerOperation("GetPerson")]
     [SwaggerResponse(statusCode: 200, type: typeof(Person), description: "Person for ID")]
-    public virtual IActionResult GetPerson([FromRoute][Required]int id)
+    public async Task<IActionResult> GetPerson([FromRoute][Required]int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var person = await _personRepository.GetPersonAsync(id);
+
+            return Ok(PersonConverter.Convert(person));
+        }
+        catch (PersonNotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     /// <summary>
@@ -71,8 +120,10 @@ public class PersonsController : ControllerBase
     [HttpGet]
     [SwaggerOperation("ListPersons")]
     [SwaggerResponse(statusCode: 200, type: typeof(List<Person>), description: "All Persons")]
-    public virtual IActionResult ListPersons()
+    public async Task<IActionResult> ListPersons()
     {
-        throw new NotImplementedException();
+        var persons = await _personRepository.GetAllPersonsAsync();
+        
+        return Ok(persons.ConvertAll(PersonConverter.Convert));
     }
 }

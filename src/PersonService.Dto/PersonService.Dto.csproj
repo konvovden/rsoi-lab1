@@ -7,4 +7,9 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="OptionalTypes" Version="1.0.9" />
+      <PackageReference Include="OptionalTypes.JsonConverters" Version="1.0.9" />
+    </ItemGroup>
+
 </Project>

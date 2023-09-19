@@ -7,4 +7,10 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\PersonService.Core\PersonService.Core.csproj" />
+      <ProjectReference Include="..\PersonService.Database.Context\PersonService.Database.Context.csproj" />
+      <ProjectReference Include="..\PersonService.Database.Models\PersonService.Database.Models.csproj" />
+    </ItemGroup>
+
 </Project>
