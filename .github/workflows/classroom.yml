@@ -62,6 +62,11 @@ jobs:
             docker-compose -f rsoi/docker-compose.yml pull
             docker-compose -f rsoi/docker-compose.yml up -d
 
+      - name: Wait startup
+        uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '30s'
+
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
