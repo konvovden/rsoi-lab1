@@ -63,9 +63,9 @@ jobs:
             docker-compose -f rsoi/docker-compose.yml up -d
 
       - name: Wait startup
-        uses: GuillaumeFalourd/wait-sleep-action@v1
+        uses: iFaxity/wait-on-action
         with:
-          time: '30s'
+          resource: http://${{ secrets.DEPLOY_HOST }}:8080/api/v2/persons
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
