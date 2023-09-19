@@ -37,6 +37,7 @@ jobs:
         with:
           push: true
           tags: konvovden/person-service:latest
+          context: .
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
