@@ -74,6 +74,7 @@ jobs:
           environment: postman/[inst][heroku] Lab1.postman_environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
+          envVar: '[{ "key": "baseUrl", "value": "${{ secrets.DEPLOY_HOST }}:8080"}]'
 
       - name: Autograding
         uses: education/autograding@v1
